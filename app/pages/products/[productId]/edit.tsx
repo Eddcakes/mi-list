@@ -7,7 +7,7 @@ import { ProductForm, FORM_ERROR } from "app/products/components/ProductForm"
 
 export const EditProduct = () => {
   const router = useRouter()
-  const productId = useParam("productId", "number")
+  const productId = useParam("productId", "string")
   const [product, { setQueryData }] = useQuery(getProduct, { id: productId })
   const [updateProductMutation] = useMutation(updateProduct)
 

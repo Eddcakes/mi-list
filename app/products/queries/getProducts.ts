@@ -1,6 +1,8 @@
-import { paginate, resolver } from "blitz"
-import db, { Prisma } from "db"
+// import { paginate, resolver } from "blitz"
+import db from "db"
+import { gql } from "graphql-request"
 
+/* 
 interface GetProductsInput
   extends Pick<Prisma.ProductFindManyArgs, "where" | "orderBy" | "skip" | "take"> {}
 
@@ -22,4 +24,23 @@ export default resolver.pipe(
       count,
     }
   }
-)
+) */
+
+export default async function getProducts(_ = null) {
+  const { products } = await db.request(
+    gql`
+      query FindAllProducts {
+        products: allProducts {
+          data {
+            id: _id
+            name
+            isImportant
+            isComplete
+            isDeleted
+          }
+        }
+      }
+    `
+  )
+  return products
+}

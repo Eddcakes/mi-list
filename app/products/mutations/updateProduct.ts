@@ -1,15 +1,19 @@
-import { resolver } from "blitz"
+import { Ctx } from "blitz" //resolver,
 import db from "db"
+import { gql } from "graphql-request"
 import * as z from "zod"
 
 const UpdateProduct = z
   .object({
     id: z.number(),
     name: z.string(),
+    isImportant: z.boolean(),
+    isComplete: z.boolean(),
+    isDeleted: z.boolean(),
   })
   .nonstrict()
-
-export default resolver.pipe(
+type UpdateProductType = z.infer<typeof UpdateProduct>
+/* export default resolver.pipe(
   resolver.zod(UpdateProduct),
   resolver.authorize(),
   async ({ id, ...data }) => {
@@ -19,3 +23,43 @@ export default resolver.pipe(
     return product
   }
 )
+ */
+
+export default async function updateProduct(input: UpdateProductType, { session }: Ctx) {
+  if (!session.userId) return null
+  const { product } = await db.request(
+    gql`
+      mutation updateAProduct(
+        $id: ID!
+        $name: String!
+        $isImportant: Boolean
+        $isComplete: Boolean
+        $isDeleted: Boolean
+      ) {
+        product: updateProduct(
+          id: $id
+          data: {
+            name: $name
+            isImportant: $isImportant
+            isComplete: $isComplete
+            isDeleted: $isDeleted
+          }
+        ) {
+          id: _id
+          name
+          isImportant
+          isComplete
+          isDeleted
+        }
+      }
+    `,
+    {
+      id: input.id,
+      name: input.name,
+      isImportant: input.isImportant,
+      isComplete: input.isComplete,
+      isDeleted: input.isDeleted,
+    }
+  )
+  return product
+}

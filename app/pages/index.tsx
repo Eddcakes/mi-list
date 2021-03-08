@@ -3,7 +3,7 @@ import { Link, BlitzPage, useMutation } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import logout from "app/auth/mutations/logout"
-
+import { Box, Button } from "@chakra-ui/react"
 /*
  * This file is just for a pleasant getting started page for your new app.
  * You can delete everything in here and start from scratch if you like.
@@ -16,19 +16,24 @@ const UserInfo = () => {
   if (currentUser) {
     return (
       <>
-        <button
-          className="button small"
-          onClick={async () => {
-            await logoutMutation()
-          }}
-        >
-          Logout
-        </button>
-        <div>
-          User id: <code>{currentUser.id}</code>
-          <br />
-          User role: <code>{currentUser.role}</code>
-        </div>
+        <Box textAlign="center" p={4}>
+          <div>
+            <Link href="/products">Products</Link>
+            <br />
+            User id: <code>{currentUser.id}</code>
+            <br />
+            User role: <code>{currentUser.role}</code>
+          </div>
+          <Button
+            colorScheme="purple"
+            className="button small"
+            onClick={async () => {
+              await logoutMutation()
+            }}
+          >
+            Logout
+          </Button>
+        </Box>
       </>
     )
   } else {
