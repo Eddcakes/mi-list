@@ -18,6 +18,7 @@ type Session {
 
 type Product {
   name: String! @unique
+  category: String
   isImportant: Boolean
   isComplete: Boolean
   isDeleted: Boolean

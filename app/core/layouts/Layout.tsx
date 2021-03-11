@@ -1,7 +1,8 @@
 import { ReactNode } from "react"
 import { Head } from "blitz"
-import { Box, useColorMode } from "@chakra-ui/react"
+import { Box, Container, useColorMode } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "../components/ColorModeSwitcher"
+import { GoHome } from "../components/GoHome"
 
 type LayoutProps = {
   title?: string
@@ -28,14 +29,15 @@ const Layout = ({ title, children }: LayoutProps) => {
           as="header"
           display="flex"
           alignItems="center"
-          justifyContent="flex-end"
+          justifyContent="space-between"
           paddingX="4"
           paddingY="2"
           bg={headerColor[colorMode]}
         >
+          <GoHome />
           <ColorModeSwitcher />
         </Box>
-        {children}
+        <Container>{children}</Container>
       </Box>
     </>
   )

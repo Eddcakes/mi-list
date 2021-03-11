@@ -1,9 +1,9 @@
 import { Suspense } from "react"
-import { Link, BlitzPage, useMutation } from "blitz"
+import { Link as BlitzLink, BlitzPage, useMutation } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import logout from "app/auth/mutations/logout"
-import { Box, Button } from "@chakra-ui/react"
+import { Box, Button, Stack } from "@chakra-ui/react"
 /*
  * This file is just for a pleasant getting started page for your new app.
  * You can delete everything in here and start from scratch if you like.
@@ -17,13 +17,24 @@ const UserInfo = () => {
     return (
       <>
         <Box textAlign="center" p={4}>
-          <div>
-            <Link href="/products">Products</Link>
-            <br />
+          <Stack>
+            <BlitzLink href="/products" passHref>
+              <Button as="a" fontSize="lg" variant="solid" colorScheme="purple">
+                Products
+              </Button>
+            </BlitzLink>
+            <Button as="a" fontSize="lg" variant="solid" colorScheme="purple" disabled={true}>
+              Planner
+            </Button>
+            <Button as="a" fontSize="lg" variant="solid" colorScheme="purple" disabled={true}>
+              Recipes
+            </Button>
+          </Stack>
+          <Box>
             User id: <code>{currentUser.id}</code>
             <br />
             User role: <code>{currentUser.role}</code>
-          </div>
+          </Box>
           <Button
             colorScheme="purple"
             className="button small"
@@ -31,7 +42,7 @@ const UserInfo = () => {
               await logoutMutation()
             }}
           >
-            Logout
+            Sign out
           </Button>
         </Box>
       </>
@@ -39,16 +50,16 @@ const UserInfo = () => {
   } else {
     return (
       <>
-        <Link href="/signup">
-          <a className="button small">
-            <strong>Sign Up</strong>
-          </a>
-        </Link>
-        <Link href="/login">
-          <a className="button small">
-            <strong>Login</strong>
-          </a>
-        </Link>
+        <BlitzLink href="/signup" passHref>
+          <Button as="a" colorScheme="purple" className="button small">
+            Sign up
+          </Button>
+        </BlitzLink>
+        <BlitzLink href="/login" passHref>
+          <Button as="a" colorScheme="purple" className="button small">
+            Sign in
+          </Button>
+        </BlitzLink>
       </>
     )
   }
@@ -57,8 +68,6 @@ const UserInfo = () => {
 const Home: BlitzPage = () => {
   return (
     <div>
-      <h1>Hello, world!</h1>
-
       <Suspense fallback="Loading...">
         <UserInfo />
       </Suspense>
