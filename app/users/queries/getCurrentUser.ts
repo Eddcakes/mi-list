@@ -14,6 +14,7 @@ import { gql } from "graphql-request"
 } */
 
 export default async function getCurrentUser(_ = null, { session }: Ctx) {
+  console.log("get current user")
   if (!session.userId) return null
 
   const { user } = await db.request(

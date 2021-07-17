@@ -35,6 +35,7 @@ export function Form<S extends z.ZodType<any, any>>({
         if (schema) {
           schema.parse(values)
         }
+        console.log({ values, errors: {} })
         return { values, errors: {} }
       } catch (error) {
         return { values: {}, errors: error.formErrors?.fieldErrors }

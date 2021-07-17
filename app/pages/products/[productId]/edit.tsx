@@ -1,9 +1,11 @@
 import { Suspense } from "react"
 import { Head, Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
+
 import Layout from "app/core/layouts/Layout"
 import getProduct from "app/products/queries/getProduct"
 import updateProduct from "app/products/mutations/updateProduct"
 import { ProductForm, FORM_ERROR } from "app/products/components/ProductForm"
+import { CreateProduct, UpdateProduct } from "app/products/validations"
 
 export const EditProduct = () => {
   const router = useRouter()
@@ -26,15 +28,18 @@ export const EditProduct = () => {
           // TODO use a zod schema for form validation
           //  - Tip: extract mutation's schema into a shared `validations.ts` file and
           //         then import and use it here
-          // schema={UpdateProduct}
+          schema={UpdateProduct}
+          //when using updateProduct schema it complains about id being overwritten
           initialValues={product}
           onSubmit={async (values) => {
+            console.log(values)
             try {
+              setQueryData(values, { refetch: false })
               const updated = await updateProductMutation({
-                id: product.id,
                 ...values,
+                id: product.id,
               })
-              await setQueryData(updated)
+              setQueryData(updated)
               router.push(`/products/${updated.id}`)
             } catch (error) {
               console.error(error)

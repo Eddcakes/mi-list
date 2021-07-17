@@ -3,11 +3,8 @@ import db from "db"
 import { gql } from "graphql-request"
 import * as z from "zod"
 
-const DeleteProduct = z
-  .object({
-    id: z.number(),
-  })
-  .nonstrict()
+import { DeleteProduct } from "app/products/validations"
+
 type DeleteProductType = z.infer<typeof DeleteProduct>
 /* export default resolver.pipe(resolver.zod(DeleteProduct), resolver.authorize(), async ({ id }) => {
   // TODO: in multi-tenant app, you must add validation to ensure correct tenant

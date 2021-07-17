@@ -82,6 +82,7 @@ module.exports = {
         return normalizeSession(sessionRes)
       },
       updateSession: async (sessionHandle, session) => {
+        console.log("trying to update session")
         const { findSessionByHandle: existingSession } = await graphQLClient.request(
           gql`
             query getSession($handle: String!) {

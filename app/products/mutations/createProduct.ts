@@ -3,14 +3,7 @@ import db from "db"
 import { gql } from "graphql-request"
 import * as z from "zod"
 
-const CreateProduct = z
-  .object({
-    name: z.string(),
-    isImportant: z.boolean().optional(),
-    isComplete: z.boolean().optional(),
-    isDeleted: z.boolean().optional(),
-  })
-  .nonstrict()
+import { CreateProduct } from "app/products/validations"
 
 type ProductType = z.infer<typeof CreateProduct>
 /* export default resolver.pipe(resolver.zod(CreateProduct), resolver.authorize(), async (input) => {

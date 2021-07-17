@@ -12,7 +12,6 @@ import { Box, Button, Stack } from "@chakra-ui/react"
 const UserInfo = () => {
   const currentUser = useCurrentUser()
   const [logoutMutation] = useMutation(logout)
-
   if (currentUser) {
     return (
       <>

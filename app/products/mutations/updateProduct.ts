@@ -3,16 +3,8 @@ import db from "db"
 import { gql } from "graphql-request"
 import * as z from "zod"
 
-const UpdateProduct = z
-  .object({
-    id: z.number(),
-    name: z.string(),
-    isImportant: z.boolean(),
-    isComplete: z.boolean(),
-    isDeleted: z.boolean(),
-  })
-  .nonstrict()
-type UpdateProductType = z.infer<typeof UpdateProduct>
+import { UpdateProduct } from "app/products/validations"
+export type UpdateProductType = z.infer<typeof UpdateProduct>
 /* export default resolver.pipe(
   resolver.zod(UpdateProduct),
   resolver.authorize(),
