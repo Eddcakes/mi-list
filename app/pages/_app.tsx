@@ -1,13 +1,14 @@
 import {
   AppProps,
+  ErrorBoundary,
   ErrorComponent,
-  useRouter,
   AuthenticationError,
   AuthorizationError,
   ErrorFallbackProps,
+  useQueryErrorResetBoundary,
+  useRouter,
 } from "blitz"
-import { ErrorBoundary } from "react-error-boundary"
-import { queryCache } from "react-query"
+import { QueryCache } from "react-query"
 import LoginForm from "app/auth/components/LoginForm"
 
 import { ChakraProvider, theme } from "@chakra-ui/react"
@@ -21,11 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ErrorBoundary
         FallbackComponent={RootErrorFallback}
         resetKeys={[router.asPath]}
-        onReset={() => {
-          // This ensures the Blitz useQuery hooks will automatically refetch
-          // data any time you reset the error boundary
-          queryCache.resetErrorBoundaries()
-        }}
+        onReset={useQueryErrorResetBoundary().reset}
       >
         {getLayout(<Component {...pageProps} />)}
       </ErrorBoundary>

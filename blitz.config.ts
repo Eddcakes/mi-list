@@ -1,5 +1,5 @@
-const { sessionMiddleware, simpleRolesIsAuthorized } = require("@blitzjs/server")
-const { GraphQLClient, gql } = require("graphql-request")
+import { BlitzConfig, sessionMiddleware, simpleRolesIsAuthorized } from "blitz"
+import { GraphQLClient, gql } from "graphql-request"
 
 const graphQLClient = new GraphQLClient("https://graphql.fauna.com/graphql", {
   headers: {
@@ -17,9 +17,10 @@ const normalizeSession = (faunaSession) => {
   }
 }
 
-module.exports = {
+const config: BlitzConfig = {
   middleware: [
     sessionMiddleware({
+      cookiePrefix: "my-list",
       isAuthorized: simpleRolesIsAuthorized,
       getSession: async (handle) => {
         const { findSessionByHandle: session } = await graphQLClient.request(
@@ -160,3 +161,4 @@ module.exports = {
   },
   */
 }
+module.exports = config

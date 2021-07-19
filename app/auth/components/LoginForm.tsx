@@ -1,4 +1,4 @@
-import { AuthenticationError, Link, useMutation } from "blitz"
+import { AuthenticationError, Link, useMutation, Routes } from "blitz"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import login from "app/auth/mutations/login"
 import { Login } from "app/auth/validations"
@@ -39,14 +39,14 @@ export const LoginForm = (props: LoginFormProps) => {
         <InputField name="email" label="Email" placeholder="Email" />
         <InputPasswordField name="password" label="Password" placeholder="Password" />
         <div>
-          <Link href="/forgot-password">
+          <Link href={Routes.ForgotPasswordPage()}>
             <a>Forgot your password?</a>
           </Link>
         </div>
       </Form>
 
       <div style={{ marginTop: "1rem" }}>
-        Or <Link href="/signup">Sign Up</Link>
+        Or <Link href={Routes.SignupPage()}>Sign Up</Link>
       </div>
     </div>
   )

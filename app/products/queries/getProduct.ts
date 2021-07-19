@@ -1,6 +1,6 @@
 //import { Ctx } from "blitz"
 import db from "db"
-import * as z from "zod"
+import { z } from "zod"
 import { gql } from "graphql-request"
 
 const GetProduct = z.object({

@@ -1,7 +1,7 @@
 import { Ctx } from "blitz" //resolver,
 import db from "db"
 import { gql } from "graphql-request"
-import * as z from "zod"
+import { z } from "zod"
 
 import { CreateProduct } from "app/products/validations"
 
@@ -15,9 +15,12 @@ type ProductType = z.infer<typeof CreateProduct>
  */
 
 export default async function createProduct(input: ProductType, { session }: Ctx) {
-  const { name, isImportant = false, isComplete = false, isDeleted = false } = CreateProduct.parse(
-    input
-  )
+  const {
+    name,
+    isImportant = false,
+    isComplete = false,
+    isDeleted = false,
+  } = CreateProduct.parse(input)
   const { product } = await db.request(
     gql`
       mutation createAProduct(

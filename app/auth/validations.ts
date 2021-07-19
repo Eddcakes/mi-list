@@ -1,4 +1,4 @@
-import * as z from "zod"
+import { z } from "zod"
 
 const password = z.string().min(10).max(100)
 
@@ -7,14 +7,10 @@ export const Signup = z.object({
   password,
 })
 
-export type SignupType = z.infer<typeof Signup>
-
 export const Login = z.object({
   email: z.string().email(),
   password: z.string(),
 })
-
-export type LoginType = z.infer<typeof Login>
 
 export const ForgotPassword = z.object({
   email: z.string().email(),

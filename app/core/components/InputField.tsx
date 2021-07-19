@@ -15,14 +15,14 @@ export interface InputProps extends ChakraInputProps {
   /** Field label. */
   label: string
   helperText?: string
+  placeholder?: string
 }
 
 export const InputField = forwardRef<HTMLInputElement, InputProps>(
   ({ label, name, placeholder, helperText, ...props }, ref) => {
     const {
       register,
-      formState: { isSubmitting },
-      errors,
+      formState: { isSubmitting, errors },
     } = useFormContext()
     const error = Array.isArray(errors[name])
       ? errors[name].join(", ")
@@ -31,7 +31,7 @@ export const InputField = forwardRef<HTMLInputElement, InputProps>(
     return (
       <FormControl>
         <FormLabel>{label}</FormLabel>
-        <Input name={name} placeItems={placeholder} disabled={isSubmitting} ref={register} />
+        <Input name={name} placeItems={placeholder} disabled={isSubmitting} {...register(name)} />
         {helperText && <FormHelperText>{helperText}</FormHelperText>}
         <Box color="red">{error}</Box>
       </FormControl>

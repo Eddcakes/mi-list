@@ -1,4 +1,4 @@
-import * as z from "zod"
+import { z } from "zod"
 
 import { Form, FormProps } from "app/core/components/Form"
 import CheckboxField from "app/core/components/CheckboxField"

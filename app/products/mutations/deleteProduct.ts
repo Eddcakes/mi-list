@@ -1,7 +1,7 @@
 import { Ctx } from "blitz" //resolver,
 import db from "db"
 import { gql } from "graphql-request"
-import * as z from "zod"
+import { z } from "zod"
 
 import { DeleteProduct } from "app/products/validations"
 

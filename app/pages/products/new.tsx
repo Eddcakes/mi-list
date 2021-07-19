@@ -1,4 +1,4 @@
-import { Link, useRouter, useMutation, BlitzPage } from "blitz"
+import { Link, useRouter, useMutation, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import createProduct from "app/products/mutations/createProduct"
 import { ProductForm, FORM_ERROR } from "app/products/components/ProductForm"
@@ -32,7 +32,7 @@ const NewProductPage: BlitzPage = () => {
       />
 
       <p>
-        <Link href="/products">
+        <Link href={Routes.ProductsPage()}>
           <a>Products</a>
         </Link>
       </p>

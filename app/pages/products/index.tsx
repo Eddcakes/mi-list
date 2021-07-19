@@ -1,5 +1,13 @@
 import { Suspense } from "react"
-import { Head, BlitzPage, useQuery, useMutation, invalidateQuery } from "blitz" //usePaginatedQuery, useRouter,Link,
+import {
+  Head,
+  Link as BlitzLink,
+  BlitzPage,
+  useQuery,
+  useMutation,
+  invalidateQuery,
+  Routes,
+} from "blitz" //usePaginatedQuery, useRouter,Link,
 import { Link as ChakraLink, Button } from "@chakra-ui/react"
 import Layout from "app/core/layouts/Layout"
 import getProducts from "app/products/queries/getProducts"
@@ -60,7 +68,7 @@ const ProductsPage: BlitzPage = () => {
           <ProductsList />
         </Suspense>
         <p>
-          <ChakraLink href="/products/new">Create Product</ChakraLink>
+          <BlitzLink href={Routes.NewProductPage()}>Create Product</BlitzLink>
         </p>
       </div>
     </>

@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { Head, Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from "blitz"
+import { Head, Link, useRouter, useQuery, useMutation, useParam, BlitzPage, Routes } from "blitz"
 
 import Layout from "app/core/layouts/Layout"
 import getProduct from "app/products/queries/getProduct"
@@ -62,7 +62,7 @@ const EditProductPage: BlitzPage = () => {
       </Suspense>
 
       <p>
-        <Link href="/products">
+        <Link href={Routes.ProductsPage()}>
           <a>Products</a>
         </Link>
       </p>

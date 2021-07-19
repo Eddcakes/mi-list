@@ -13,8 +13,7 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ label, ...props }, ref) => {
     const {
       register,
-      formState: { isSubmitting },
-      errors,
+      formState: { isSubmitting, errors },
     } = useFormContext()
     const error = Array.isArray(errors[props.name])
       ? errors[props.name].join(", ")
@@ -22,7 +21,7 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <FormControl>
-        <Checkbox disabled={isSubmitting} ref={register} name={props.name}>
+        <Checkbox disabled={isSubmitting} {...register(props.name)} name={props.name}>
           {label}
         </Checkbox>
         <Box color="red">{error}</Box>

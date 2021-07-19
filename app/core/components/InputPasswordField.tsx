@@ -19,8 +19,7 @@ export const InputPasswordField = forwardRef<HTMLInputElement, InputPasswordProp
   ({ label, name, placeholder, helperText, ...props }, ref) => {
     const {
       register,
-      formState: { isSubmitting },
-      errors,
+      formState: { isSubmitting, errors },
     } = useFormContext()
     const error = Array.isArray(errors[name])
       ? errors[name].join(", ")
@@ -35,7 +34,7 @@ export const InputPasswordField = forwardRef<HTMLInputElement, InputPasswordProp
             name={name}
             placeItems={placeholder}
             disabled={isSubmitting}
-            ref={register}
+            {...register(name)}
             pr="4.5rem"
             type={show ? "text" : "password"}
           />

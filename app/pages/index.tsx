@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { Link as BlitzLink, BlitzPage, useMutation } from "blitz"
+import { Link as BlitzLink, BlitzPage, useMutation, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import logout from "app/auth/mutations/logout"
@@ -17,7 +17,7 @@ const UserInfo = () => {
       <>
         <Box textAlign="center" p={4}>
           <Stack>
-            <BlitzLink href="/products" passHref>
+            <BlitzLink href={Routes.ProductsPage()} passHref>
               <Button as="a" fontSize="lg" variant="solid" colorScheme="purple">
                 Products
               </Button>
@@ -49,12 +49,12 @@ const UserInfo = () => {
   } else {
     return (
       <>
-        <BlitzLink href="/signup" passHref>
+        <BlitzLink href={Routes.SignupPage()} passHref>
           <Button as="a" colorScheme="purple" className="button small">
             Sign up
           </Button>
         </BlitzLink>
-        <BlitzLink href="/login" passHref>
+        <BlitzLink href={Routes.LoginPage()} passHref>
           <Button as="a" colorScheme="purple" className="button small">
             Sign in
           </Button>

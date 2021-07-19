@@ -1,6 +1,6 @@
 import { useState, ReactNode, PropsWithoutRef } from "react"
-import { FormProvider, useForm, UseFormOptions } from "react-hook-form"
-import * as z from "zod"
+import { FormProvider, useForm, UseFormProps } from "react-hook-form"
+import { z } from "zod"
 
 export interface FormProps<S extends z.ZodType<any, any>>
   extends Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit"> {
@@ -10,7 +10,7 @@ export interface FormProps<S extends z.ZodType<any, any>>
   submitText?: string
   schema?: S
   onSubmit: (values: z.infer<S>) => Promise<void | OnSubmitResult>
-  initialValues?: UseFormOptions<z.infer<S>>["defaultValues"]
+  initialValues?: UseFormProps<z.infer<S>>["defaultValues"]
 }
 
 interface OnSubmitResult {
